@@ -1,0 +1,38 @@
+# Ignore node modules and build files
+node_modules/
+dist/
+build/
+
+# Ignore OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore sensitive files (if any)
+*.env
+config.local.js
+
+# Keep important project files
+!google-apps-script.js
+!debug-tool.html
+!SETUP_GUIDE.md
