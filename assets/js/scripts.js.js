@@ -586,7 +586,7 @@ var Neela;
     -------------------------------------------*/
      if ($("#clock").length) {
         function timeElapse(date){
-            var current = Date();
+            var current = new Date();
             var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
             var days = Math.floor(seconds / (3600 * 24));
             if (days < 10) {
@@ -611,13 +611,11 @@ var Neela;
         }
 		var time = $('#clock').data('date');
 
+        $('#clock').off('countdown');
         $('#clock').countdown(time.replace(/-/g,'/'), function(event) {
             if(event.type == 'stoped'){
+                // Use the actual wedding date/time for elapsed calculation
                 var together = new Date($('#clock').data('date'));
-                together.setHours(0);
-                together.setMinutes(0);
-                together.setSeconds(0);
-                together.setMilliseconds(0);
                 setInterval(function() {
                     timeElapse(together);
                 }, 1000);

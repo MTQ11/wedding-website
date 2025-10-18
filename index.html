@@ -57,6 +57,7 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Bellota+Text:wght@300;400;700&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Allura&family=Sacramento&family=Playfair+Display:wght@400;700&family=Marmelad&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="./assets/fonts/css2" rel="stylesheet">
     <link href="./assets/fonts/css2(1)" rel="stylesheet">
 
@@ -2525,6 +2526,42 @@
         }
     </style>
     <style data-styled="active" data-styled-version="5.3.11"></style>
+    
+    <!-- ===== FONT FALLBACK STYLES ===== -->
+    <style>
+        body, html {
+            font-family: 'Open Sans', 'Marmelad', 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+        
+        * {
+            font-family: inherit;
+        }
+        
+        /* Ensure important text elements have fallback fonts */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Marmelad', 'Open Sans', 'Playfair Display', serif !important;
+        }
+        
+        .section-title,
+        .hero-title,
+        .hero-title span,
+        h1.hero-title,
+        .hero-wrapper h1.hero-title,
+        .heading,
+        .title {
+            font-family: 'Marmelad', 'Open Sans', serif !important;
+        }
+        
+        /* Ensure body text has good fallbacks */
+        p, span, div, a, button, input, textarea {
+            font-family: 'Open Sans', 'Marmelad', 'Lato', 'Segoe UI', Arial, sans-serif !important;
+        }
+        
+        /* Special font for decorative elements */
+        .decorative-text {
+            font-family: 'Dancing Script', 'Bellota Text', cursive !important;
+        }
+    </style>
 </head>
 
 
@@ -3010,8 +3047,8 @@
                             <h3 class="editable" id="couple_title_1">Và cuối cùng...
                             </h3>
                             <p class="editable font-style-h4" id="thanks_couple-info_general-info_invitation">
-                                Hai mảnh ghép tưởng chừng như đối lập ấy lại quyết định cùng nhau tiến đến một chương
-                                mới trong cuộc đờiTrân trọng kính mời anh/chị/bạn/em tới tham dự tiệc mừng cưới của:</p>
+                                Sau nhiều năm yêu nhau chúng mình đã đi đến quyết định cùng nhau tiến đến một chương
+                                mới trong cuộc đời <br>Trân trọng kính mời anh/chị/bạn/em tới tham dự tiệc mừng cưới của:</p>
                             <p class="groom-bride-signature">
                                 <span>Thế Quyền</span> &amp;
                                 <span>Ngọc Hà</span>
@@ -3581,16 +3618,76 @@
 
 
                                     <div class="count-down-clock">
-                                        <div id="clock" data-date="2025-11-09" data-text-day="Ngày" data-text-hour="Giờ"
+                                        <div id="clock" data-date="2025-11-09 18:00:00" data-text-day="Ngày" data-text-hour="Giờ"
                                             data-text-minute="Phút" data-text-second="Giây">
                                             <div class="box">
-                                                <div>22</div> <span>Ngày</span>
+                                                <div id="days">22</div> <span>Ngày</span>
                                             </div>
                                             <div class="box">
-                                                <div>23</div> <span>Giờ</span>
+                                                <div id="hours">23</div> <span>Giờ</span>
                                             </div>
                                             <div class="box">
-                                                <div>10</div> <span>Phút</span>
+                                                <div id="minutes">10</div> <span>Phút</span>
+                                            </div>
+                                            <div class="box">
+                                                <div id="seconds">30</div> <span>Giây</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- ===== COUNTDOWN SCRIPT ===== -->
+                                    <script>
+                                        function startCountdown() {
+                                            // Ngày đích: 9/11/2025 18:00:00
+                                            const weddingDate = new Date('2025-11-09T18:00:00').getTime();
+                                            
+                                            function updateCountdown() {
+                                                const now = new Date().getTime();
+                                                const distance = weddingDate - now;
+                                                
+                                                if (distance > 0) {
+                                                    // Tính toán thời gian còn lại
+                                                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                                    
+                                                    // Cập nhật hiển thị
+                                                    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                                                    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                                                    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                                                    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                                                } else {
+                                                    // Khi đã đến ngày cưới
+                                                    document.getElementById('days').textContent = '00';
+                                                    document.getElementById('hours').textContent = '00';
+                                                    document.getElementById('minutes').textContent = '00';
+                                                    document.getElementById('seconds').textContent = '00';
+                                                    
+                                                    // Hiển thị thông báo
+                                                    document.getElementById('clock').innerHTML = '<div style="text-align: center; color: #fff; font-size: 24px; padding: 20px;">🎉 Ngày cưới đã đến! 🎉</div>';
+                                                }
+                                            }
+                                            
+                                            // Cập nhật ngay lập tức
+                                            updateCountdown();
+                                            
+                                            // Cập nhật mỗi giây
+                                            setInterval(updateCountdown, 1000);
+                                        }
+                                        
+                                        // Khởi động countdown khi trang load
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            startCountdown();
+                                        });
+                                        
+                                        // Backup: Khởi động sau 1 giây nếu DOMContentLoaded đã qua
+                                        setTimeout(function() {
+                                            if (document.getElementById('seconds').textContent === '30') {
+                                                startCountdown();
+                                            }
+                                        }, 1000);
+                                    </script>
                                             </div>
                                             <div class="box">
                                                 <div>57</div> <span>Giây</span>
@@ -5999,8 +6096,7 @@
                             <div class="wish-box" id="congratulation-list" data-slug="quyen-ha-09112025-1800">
                                 <div class="wish-box-item">
                                     <strong>Chúng tớ <3</strong>
-                                    <p>Chúng tớ rất vui khi được đồng hành cùng hai bạn trong chặng đường hạnh phúc. Dù
-                                        sông có đổi núi có dời, chúc hai bạn vẫn một đời thương nhau &lt;3 </p>
+                                    <p>Xin chân thành cảm ơn những lời chúc tốt đẹp của mọi người. Mong mọi người vẫn sẽ luôn ủng hộ tụi mình trong những chặng đường sắp tới</p>
                                 </div>
                             </div>
                         </div>
@@ -6780,6 +6876,14 @@
                     </span>
                 </a>
             </li>
+            <li class="text-center">
+                <a href="#" onclick="toggleMusic()" class="text-white">
+                    <span class="content-button tooltipBtn">
+                        <span class="tooltiptext">Bật/Tắt nhạc</span>
+                        <img id="music-icon" class="access-icon" src="./assets/images/music-play.svg" alt="" style="transition: all 0.3s ease; filter: brightness(0) invert(1);">
+                    </span>
+                </a>
+            </li>
         </ul>
     </div>
     <div id="custom-alert"
@@ -6998,7 +7102,7 @@
         ];
         var custom_color = "#ee8584";
         const biicore = {
-            bgMusic: '/mp3/cuoi-anh-di.mp3',
+            bgMusic: './mp3/cuoi-anh-di.mp3',
             isPremium: ('1' === '1'),
             templatePremium: ('1' === '1'),
             alert: JSON.parse('[]'),
@@ -7548,7 +7652,7 @@
                     class="minicolors-grid" style="background-color: rgb(255, 0, 0);"><span
                         class="minicolors-grid-inner"></span><span class="minicolors-picker"
                         style="top: 150px; left: 0px;"><span></span></span></span></span></span>
-        <audio src="/mp3/cuoi-anh-di.mp3" controls="controls" style="display: none;"></audio>
+        <audio src="./mp3/cuoi-anh-di.mp3" controls="controls" style="display: none;"></audio>
         <script defer="" src="./assets/images/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
             integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
             data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;29cb71a6cc4a463789b01068cd791fd7&quot;,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}"
@@ -7821,23 +7925,23 @@
     <!-- Original snowfall elements (now active) -->
     <img src="./assets/images/donut1.png" class="snowfall-flake"
         style="width: 43.44px; height: 43.44px; position: fixed; z-index: 999999; top: -150px; left: 441px; animation-delay: 0s;">
-    <img src="./assets/images/donut1.png" class="snowfall-flake"
+    <img src="./assets/images/donut2.png" class="snowfall-flake"
         style="width: 45.92px; height: 45.92px; position: fixed; z-index: 999999; top: -150px; left: 431px; animation-delay: 1s;">
     <img src="./assets/images/donut1.png" class="snowfall-flake"
         style="width: 40.85px; height: 40.85px; position: fixed; z-index: 999999; top: -150px; left: 1050px; animation-delay: 2s;">
-    <img src="./assets/images/donut1.png" class="snowfall-flake"
+    <img src="./assets/images/donut2.png" class="snowfall-flake"
         style="width: 29.96px; height: 29.96px; position: fixed; z-index: 999999; top: -150px; left: 516px; animation-delay: 3s;">
     <img src="./assets/images/donut1.png" class="snowfall-flake"
         style="width: 55.5px; height: 55.5px; position: fixed; z-index: 999999; top: -150px; left: 947px; animation-delay: 4s;">
     <img src="./assets/images/donut1.png" class="snowfall-flake"
         style="width: 40.66px; height: 40.66px; position: fixed; z-index: 999999; top: -150px; left: 104px; animation-delay: 5s;">
-    <img src="./assets/images/donut1.png" class="snowfall-flake"
+    <img src="./assets/images/donut2.png" class="snowfall-flake"
         style="width: 54.14px; height: 54.14px; position: fixed; z-index: 999999; top: -150px; left: 812px; animation-delay: 6s;">
-    <img src="./assets/images/donut1.png" class="snowfall-flake"
+    <img src="./assets/images/donut2.png" class="snowfall-flake"
         style="width: 30.93px; height: 30.93px; position: fixed; z-index: 999999; top: -150px; left: 337px; animation-delay: 7s;">
     <img src="./assets/images/donut1.png" class="snowfall-flake"
         style="width: 38.12px; height: 38.12px; position: fixed; z-index: 999999; top: -150px; left: 1316px; animation-delay: 8s;">
-    <img src="./assets/images/donut1.png" class="snowfall-flake"
+    <img src="./assets/images/donut2.png" class="snowfall-flake"
         style="width: 58.25px; height: 58.25px; position: fixed; z-index: 999999; top: -150px; left: 607px; animation-delay: 9s;">
     <!-- RSVP Modal -->
     <div id="rsvpModal" class="rsvp-modal-overlay" style="display: none;">
@@ -8400,7 +8504,7 @@
     </script>
 
     <!-- ===== BACKGROUND MUSIC ===== -->
-    <audio src="./assets/audio/cuoi-anh-di.mp3" controls="controls" style="display: none;"></audio>
+    <audio src="./mp3/cuoi-anh-di.mp3" controls="controls" style="display: none;"></audio>
 
     <!-- ===== JAVASCRIPT LIBRARIES ===== -->
     <script src="./assets/js/jquery.min.js"></script>
@@ -8598,6 +8702,169 @@
             }
         }
     </script>
+    
+    <!-- ===== MUSIC CONTROL SCRIPT ===== -->
+    <script>
+        let backgroundMusic = null;
+        let isMusicPlaying = false;
+        let musicLoaded = false;
+        
+        // Initialize music on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create audio element
+            backgroundMusic = new Audio('./mp3/cuoi-anh-di.mp3');
+            backgroundMusic.loop = true;
+            backgroundMusic.volume = 0.3; // Set volume to 30%
+            
+            // Add event listeners
+            backgroundMusic.addEventListener('loadeddata', function() {
+                console.log('Music loaded successfully');
+                musicLoaded = true;
+            });
+            
+            backgroundMusic.addEventListener('canplaythrough', function() {
+                console.log('Music can play through');
+                musicLoaded = true;
+            });
+            
+            backgroundMusic.addEventListener('error', function(e) {
+                console.error('Error loading music:', e);
+                console.error('Audio error details:', {
+                    error: e.target.error,
+                    src: e.target.src,
+                    networkState: e.target.networkState,
+                    readyState: e.target.readyState
+                });
+                musicLoaded = false;
+                
+                // Don't hide button, just show warning
+                console.warn('Music file not found or cannot be loaded');
+            });
+            
+            // Preload music
+            backgroundMusic.load();
+        });
+        
+        function toggleMusic() {
+            const musicIcon = document.getElementById('music-icon');
+            const tooltip = musicIcon.parentElement.querySelector('.tooltiptext');
+            
+            console.log('Toggle music clicked. State:', {
+                backgroundMusic: !!backgroundMusic,
+                musicLoaded: musicLoaded,
+                isMusicPlaying: isMusicPlaying,
+                audioSrc: backgroundMusic ? backgroundMusic.src : 'none'
+            });
+            
+            if (!backgroundMusic) {
+                alert('Đối tượng audio chưa được khởi tạo! Vui lòng reload trang.');
+                return;
+            }
+            
+            if (!musicLoaded) {
+                console.warn('Music not loaded, attempting to play anyway...');
+                // Try to play anyway, sometimes it works
+            }
+            
+            if (isMusicPlaying) {
+                // Pause music
+                backgroundMusic.pause();
+                musicIcon.src = './assets/images/music-play.svg';
+                tooltip.textContent = 'Bật nhạc';
+                isMusicPlaying = false;
+                
+                // Remove pulse animation when paused
+                musicIcon.style.animation = 'none';
+                musicIcon.style.transform = 'scale(1)';
+                
+                // Update old player UI
+                updateOldPlayerUI(false);
+            } else {
+                // Play music
+                console.log('Attempting to play music...');
+                backgroundMusic.play().then(() => {
+                    console.log('Music started playing successfully');
+                    musicIcon.src = './assets/images/music-pause.svg';
+                    tooltip.textContent = 'Tắt nhạc';
+                    isMusicPlaying = true;
+                    
+                    // Add pulse animation when playing
+                    musicIcon.style.animation = 'musicPulse 1.5s ease-in-out infinite';
+                    
+                    // Update old player UI
+                    updateOldPlayerUI(true);
+                }).catch(error => {
+                    console.error('Error playing music:', error);
+                    alert(`Không thể phát nhạc!\nLỗi: ${error.message}\nFile: ${backgroundMusic.src}\nKiểm tra console để biết thêm chi tiết.`);
+                });
+            }
+        }
+        
+        // Helper function to update old player UI
+        function updateOldPlayerUI(isPlaying) {
+            const volumeOff = document.getElementById('playerVolumeOff');
+            const volumeOn = document.getElementById('playerVolumeOn');
+            
+            if (volumeOff && volumeOn) {
+                if (isPlaying) {
+                    volumeOff.style.display = 'none';
+                    volumeOn.style.display = 'inline';
+                } else {
+                    volumeOff.style.display = 'inline';
+                    volumeOn.style.display = 'none';
+                }
+            }
+        }
+        
+        // Auto play music on first user interaction (if allowed by browser)
+        document.addEventListener('click', function playOnFirstClick() {
+            if (!isMusicPlaying && backgroundMusic && musicLoaded) {
+                backgroundMusic.play().then(() => {
+                    const musicIcon = document.getElementById('music-icon');
+                    const tooltip = musicIcon.parentElement.querySelector('.tooltiptext');
+                    
+                    musicIcon.src = './assets/images/music-pause.svg';
+                    tooltip.textContent = 'Tắt nhạc';
+                    isMusicPlaying = true;
+                    musicIcon.style.animation = 'musicPulse 1.5s ease-in-out infinite';
+                    
+                    // Update old player UI
+                    updateOldPlayerUI(true);
+                }).catch(() => {
+                    // Auto-play failed, user needs to manually start music
+                });
+            }
+            // Remove this listener after first click
+            document.removeEventListener('click', playOnFirstClick);
+        }, { once: true });
+        
+        // Legacy playPause function for compatibility with old music player
+        function playPause() {
+            toggleMusic();
+        }
+    </script>
+    
+    <!-- ===== MUSIC ANIMATION STYLES ===== -->
+    <style>
+        @keyframes musicPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+        
+        .access-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .access-icon:hover {
+            transform: scale(1.2);
+        }
+    </style>
     
     <!-- ===== CUSTOM JAVASCRIPT ===== -->
     <script src="./assets/js/main.js"></script>

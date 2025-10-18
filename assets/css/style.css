@@ -2497,9 +2497,22 @@ p.center {
 }
 
 .about-us-desc .groom-bride-signature {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.3rem;
-    color: #535557;
+    font-family: 'Great Vibes', 'Dancing Script', 'Allura', 'Sacramento', cursive;
+    font-size: 3.2rem;
+    color: #d4af37;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    text-align: center;
+    margin: 25px 0;
+    line-height: 1.2;
+}
+
+.about-us-desc .groom-bride-signature:hover {
+    transform: rotate(0deg) scale(1.05);
+    color: #ff6b9d;
+    text-shadow: 3px 3px 6px rgba(255, 107, 157, 0.3);
 }
 
 @media (max-width:450px) {
